@@ -176,6 +176,49 @@ plt.legend(["Growth Plot", "Growth Scatter"])
 plt.show()
 
 
+# Single Bar Chart Start for Bangladesh -------------->
+
+N = 5
+ind = np.arange(N)
+width = 0.25
+fig, ax = plt.subplots()
+
+rects1 = ax.bar(ind, d_bd[0:5], width, color='g')
+
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Population')
+ax.set_title('Difference of Bangladesh Populations')
+ax.set_xticks(ind + width / 2)
+ax.set_xticklabels(('2018-2017', '2017-2016', '2016-2015', '2015-2010', '2010-2005'))
+
+ax.legend('Bangladesh')
+
+plt.show()
+
+# Single Bar Chart END Bangladesh ------------->
+
+# Single Bar Chart Start for World-------------->
+
+N = 5
+ind = np.arange(N)
+width = 0.25
+fig, ax = plt.subplots()
+
+rects2 = ax.bar(ind + width, d_world[0:5], width, color='r')
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Population')
+ax.set_title('Difference of World Populations')
+ax.set_xticks(ind + width / 2)
+ax.set_xticklabels(('2018-2017', '2017-2016', '2016-2015', '2015-2010', '2010-2005'))
+
+ax.legend('World')
+
+plt.show()
+
+# Single Bar Chart END for World ------------->
+
 # Bar Chart Start -------------->
 
 N = 10
