@@ -143,6 +143,30 @@ d_bd = diff_BD
 d_world = diff_world
 d = difference
 
+
+def get_change(current, previous):
+    if current == previous:
+        return 100.0
+    try:
+        return (abs(current - previous) / previous) * 100.0
+    except ZeroDivisionError:
+        return 0
+
+
+list_for_BD_percentage = []
+
+for e in range(0, 7, 1):
+    get_value = get_change(d_bd[e], d_bd[e+1])
+    list_for_BD_percentage.append(get_value)
+
+
+list_for_World_percentage = []
+
+for e in range(0, 7, 1):
+    get_value = get_change(d_world[e], d_world[e+1])
+    list_for_World_percentage.append(get_value)
+
+
 '''
 
 plt.hist([d, w], color=['red', 'green'], bins=25)
@@ -152,6 +176,7 @@ plt.legend(["Bangladesh Population", "World Population"])
 plt.show()
 
 '''
+
 
 # Making Plot as well as Scatter for Years with Populations
 plt.plot(x, y)
@@ -221,23 +246,36 @@ plt.show()
 
 # Bar Chart Start -------------->
 
-N = 10
+N = 7
 ind = np.arange(N)
 width = 0.25
+
 fig, ax = plt.subplots()
 
-rects1 = ax.bar(ind, d_bd[0:10], width, color='g')
+rects1 = ax.bar(ind, list_for_BD_percentage, width, color='g')
 
-rects2 = ax.bar(ind + width, d_world[0:10], width, color='r')
-
+rects2 = ax.bar(ind + width, list_for_World_percentage, width, color='r')
 
 ax.set_xlabel('Year')
 ax.set_ylabel('Population')
 ax.set_title('Difference between Bangladesh and World Populations')
 ax.set_xticks(ind + width / 2)
-ax.set_xticklabels(('2018-2017', '2017-2016', '2016-2015', '2015-2010', '2010-2005', '2005-2000', '2000-1995', '1995-1990','1990-1985', '1985-1980'))
+ax.set_xticklabels(('2018-2017', '2017-2016', '2016-2015', '2015-2010', '2010-2005', '2005-2000', '2000-1995'))
 
 ax.legend(('Bangladesh', 'World'))
+
+
+def autolabel(rects):
+    """
+    Attach a text label above each bar displaying its height
+    """
+    for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()/2, 1.05*height, '%d' % height + '%', ha='center', va='bottom')
+
+
+autolabel(rects1)
+autolabel(rects2)
 
 plt.show()
 
@@ -245,14 +283,6 @@ plt.show()
 
 
 # Pie Chart Start -------------->
-
-def get_change(current, previous):
-    if current == previous:
-        return 100.0
-    try:
-        return (abs(current - previous) / previous) * 100.0
-    except ZeroDivisionError:
-        return 0
 
 
 bd = get_change(d_bd[0], d_bd[1])
